@@ -1,0 +1,99 @@
+/* résumé: a beige CRT running an old desktop OS, with the CV open in a window */
+#resume { padding-block: clamp(90px, 12vh, 140px) 0; }
+
+/* ---------- the monitor */
+.crt95 { max-width: 1120px; margin: 0 auto; }
+.crt95-bezel { background: linear-gradient(160deg, #e6e0cf, #cfc7b2); border-radius: 26px; padding: clamp(10px, 2.4vw, 30px) clamp(10px, 2.4vw, 30px) 14px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.7), inset 0 -3px 0 rgba(0,0,0,.12), 0 30px 60px rgba(13,16,14,.18); }
+.crt95-screen { position: relative; border-radius: 14px; overflow: hidden; background: #008080; display: grid; grid-template-rows: 1fr auto; grid-template-columns: minmax(0, 1fr);
+  box-shadow: 0 0 0 3px #3a3933, 0 0 0 5px #a8a08b; }
+/* glass: faint scanlines and a curved-tube vignette, like the terminal at the top of the page */
+.crt95-screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 20; border-radius: inherit;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,.07) 2px 3px), radial-gradient(130% 110% at 50% 45%, transparent 62%, rgba(0,0,0,.35) 100%), linear-gradient(155deg, rgba(255,255,255,.1), transparent 35%); }
+.crt95-foot { display: flex; justify-content: space-between; align-items: center; padding: 12px 6px 0; font-family: var(--wide); font-size: 11px; letter-spacing: .3em; color: #7d7563; }
+.crt95-led { width: 9px; height: 9px; border-radius: 50%; background: var(--phos); box-shadow: 0 0 8px var(--phos), 0 0 2px #fff inset; animation: led 4s steps(1) infinite; }
+@keyframes led { 0%, 100% { opacity: 1; } 92% { opacity: .55; } }
+.crt95-stand { width: 34%; height: 26px; margin: 0 auto; background: linear-gradient(#bdb59f, #d6cfbb); clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); border-radius: 0 0 8px 8px; }
+
+/* ---------- the desktop */
+.w95-desk { position: relative; min-height: min(68vh, 620px); display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 18px; font-family: Tahoma, Verdana, "Segoe UI", sans-serif; font-size: 12px; }
+.w95-icons { align-self: start; display: grid; gap: 14px; }
+.w95-icon { width: 78px; display: grid; justify-items: center; gap: 4px; padding: 4px 2px; background: none; border: 0; color: #fff; text-decoration: none; font: inherit; text-align: center; cursor: pointer; }
+.w95-icon i { width: 32px; height: 32px; }
+.w95-icon span { padding: 0 3px; text-shadow: 1px 1px 0 rgba(0,0,0,.6); }
+.w95-icon:hover span, .w95-icon:focus-visible span { background: #000080; outline: 1px dotted #fff; text-shadow: none; }
+.w95-icon:focus-visible { outline: none; }
+[data-ic] { display: inline-block; flex: none; }
+[data-ic] svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- windows */
+.w95 { --face: #c0c0c0; --hi: #fff; --lo: #808080; --dk: #0a0a0a; background: var(--face); padding: 3px; color: #000; line-height: 1.35;
+  box-shadow: inset -1px -1px var(--dk), inset 1px 1px #dfdfdf, inset -2px -2px var(--lo), inset 2px 2px var(--hi), 6px 6px 0 rgba(0,0,0,.35); }
+.w95[hidden] { display: none; }
+.w95-win { width: 100%; max-width: 860px; justify-self: center; }
+.w95-win.max { position: absolute; inset: 0; max-width: none; z-index: 5; display: grid; grid-template-rows: auto auto 1fr auto; box-shadow: inset -1px -1px var(--dk), inset 1px 1px #dfdfdf, inset -2px -2px var(--lo), inset 2px 2px var(--hi); }
+.w95-win.max .w95-page { height: auto; min-height: 0; }
+.w95-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 3px 3px 3px 4px; background: linear-gradient(90deg, #000080, #1084d0); color: #fff; font-weight: 700; }
+.w95-ti { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w95-ti [data-ic] { width: 16px; height: 16px; }
+.w95-ctl { display: flex; gap: 2px; flex: none; }
+.w95-ctl button, .w95-btn { background: var(--face); color: #000; border: 0; font: inherit; cursor: pointer;
+  box-shadow: inset -1px -1px var(--dk), inset 1px 1px var(--hi), inset -2px -2px var(--lo), inset 2px 2px #dfdfdf; }
+.w95-ctl button { width: 18px; height: 16px; padding: 0; display: grid; place-items: center; font-size: 11px; line-height: 1; font-weight: 700; }
+.w95-ctl button:last-child { margin-left: 2px; }
+.w95-ctl button:active, .w95-btn:active, .w95-tab.on { box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--dk), inset -2px -2px #dfdfdf, inset 2px 2px var(--lo); }
+.w95-menu { display: flex; gap: 2px; padding: 2px 2px 3px; }
+.w95-menu span { padding: 2px 7px; }
+.w95-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; padding: 8px; min-height: 0; }
+.w95-page { height: min(48vh, 420px); overflow: auto; background: #808080; padding: 10px; box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--lo), inset -2px -2px #dfdfdf, inset 2px 2px var(--dk); }
+.w95-page img { display: block; width: 100%; height: auto; background: #fff; box-shadow: 3px 3px 0 rgba(0,0,0,.4); }
+.w95-page:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+.w95-side { display: grid; align-content: center; gap: 12px; padding: 6px 4px; }
+.w95-side h2 { margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.05; font-weight: 700; letter-spacing: -.01em; }
+.w95-side p { margin: 0; max-width: 36ch; }
+.w95-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.w95-btn { min-width: 96px; padding: 7px 16px; text-align: center; text-decoration: none; font-size: 12px; }
+#w95dl { outline: 1px solid #000; }
+.w95-btn:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+.w95-status { display: flex; gap: 3px; padding: 2px; }
+.w95-status span { flex: 1; padding: 2px 6px; box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--lo); }
+.w95-status span:last-child { flex: 2; }
+
+/* ---------- the copy dialog */
+.w95-copy { position: absolute; z-index: 10; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(380px, calc(100% - 24px)); }
+.cp-body { padding: 12px 14px 10px; display: grid; gap: 6px; }
+.cp-body p { margin: 0; }
+.cp-anim { position: relative; display: flex; justify-content: space-between; align-items: end; height: 44px; padding: 0 10px; margin-bottom: 4px; }
+.cp-anim > [data-ic] { width: 32px; height: 32px; }
+.cp-fly { position: absolute; left: 30px; bottom: 6px; width: 20px; height: 20px; }
+.cp-fly [data-ic] { width: 20px; height: 20px; }
+.w95-copy.run .cp-fly { animation: fly .8s linear infinite; }
+@keyframes fly { 0% { transform: translate(0, 0) rotate(0); opacity: 0; } 10% { opacity: 1; } 50% { transform: translate(calc(var(--span, 260px) / 2), -22px) rotate(180deg); } 90% { opacity: 1; } 100% { transform: translate(var(--span, 260px), 0) rotate(360deg); opacity: 0; } }
+.cp-bar { height: 20px; padding: 2px; background: #fff; box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--lo), inset -2px -2px #dfdfdf, inset 2px 2px var(--dk); }
+.cp-bar i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(90deg, #000080 0 10px, transparent 10px 12px); }
+.cp-acts { display: flex; justify-content: flex-end; margin-top: 4px; }
+
+/* ---------- the taskbar */
+.w95-task { position: relative; z-index: 6; display: flex; align-items: center; gap: 4px; padding: 3px; background: #c0c0c0; box-shadow: inset 0 1px #dfdfdf, inset 0 2px #fff; font-family: Tahoma, Verdana, "Segoe UI", sans-serif; font-size: 12px; color: #000; }
+.w95-start { display: flex; align-items: center; gap: 5px; padding: 3px 8px; font-weight: 700; box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf; }
+.w95-start i { width: 14px; height: 14px; background: conic-gradient(var(--phos) 0 25%, #2f5bff 0 50%, #0d100e 0 75%, #f2f3ef 0); }
+.w95-tab { --face: #c0c0c0; --hi: #fff; --lo: #808080; --dk: #0a0a0a; display: flex; align-items: center; gap: 5px; min-width: 0; max-width: 260px; padding: 3px 8px; background: var(--face); border: 0; font: inherit; color: #000; cursor: pointer;
+  box-shadow: inset -1px -1px var(--dk), inset 1px 1px var(--hi), inset -2px -2px var(--lo), inset 2px 2px #dfdfdf; }
+.w95-tab.on { background: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%) 0 0 / 2px 2px; font-weight: 700; }
+.w95-tab[hidden] { display: none; }
+.w95-tab [data-ic] { width: 16px; height: 16px; }
+.w95-tab span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w95-tray { margin-left: auto; padding: 3px 10px; box-shadow: inset -1px -1px #fff, inset 1px 1px #808080; }
+
+@media (max-width: 760px) {
+  .crt95-bezel { border-radius: 18px; }
+  .crt95-screen { border-radius: 10px; }
+  .w95-desk { grid-template-columns: minmax(0, 1fr); padding: 12px 10px; min-height: 0; }
+  .w95-icons { grid-auto-flow: column; justify-content: space-between; gap: 4px; }
+  .w95-icon { width: 70px; font-size: 11px; }
+  .w95-body { grid-template-columns: minmax(0, 1fr); }
+  .w95-page { height: 46vh; order: 2; }
+  .w95-side { order: 1; }
+  .w95-win.max { position: relative; }
+  .crt95-stand { width: 50%; height: 18px; }
+}

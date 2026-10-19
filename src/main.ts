@@ -13,6 +13,7 @@ import { initSkills, tickSkills } from "./sections/skills";
 import { initBuilds } from "./sections/builds";
 import { initWall } from "./sections/on-record/wall";
 import { initRecordPage } from "./sections/on-record/record-page";
+import { initResume } from "./sections/resume";
 import { initContact, initMarquee, tickMarquee } from "./sections/contact";
 
 document.body.classList.add("booting");
@@ -27,6 +28,7 @@ initSkills();
 initBuilds();
 initWall().then(() => ScrollTrigger.refresh());
 initRecordPage();
+initResume();
 initContact();
 initMarquee();
 
