@@ -3,6 +3,7 @@ import { $, reduceMotion, whileVisible } from "../lib/dom";
 import { ScrollTrigger } from "../lib/scroll";
 import { sfx } from "../lib/sound";
 import { SKILLS } from "../content/experience";
+import { skillIcon } from "../lib/skill-icons";
 
 interface Bubble { el: HTMLElement; r: number; x: number; y: number; vx: number; vy: number; grab: boolean }
 const bubbles: Bubble[] = [];
@@ -38,10 +39,10 @@ export function initSkills() {
   pit = $("#pit");
   const W = pit.clientWidth, H = pit.clientHeight, small = W < 600;
   for (const [name, domain] of SKILLS) {
-    const r = (small ? 38 : 56) + (name.length > 10 ? (small ? 8 : 14) : 0);
+    const r = (small ? 40 : 58) + (name.length > 9 ? (small ? 8 : 14) : 0);
     const el = document.createElement("div");
-    el.className = "bub" + (domain ? " domain" : ""); el.textContent = name; el.dataset.cursor = "drag";
-    el.style.width = el.style.height = r * 2 + "px"; pit.appendChild(el);
+    el.className = "bub" + (domain ? " domain" : ""); el.innerHTML = `${skillIcon(name)}<span>${name}</span>`; el.dataset.cursor = "drag";
+    el.style.width = el.style.height = r * 2 + "px"; el.style.setProperty("--i", Math.round(r * 0.5) + "px"); pit.appendChild(el);
     bubbles.push({ el, r, x: r + Math.random() * (W - 2 * r), y: -Math.random() * H * 1.2, vx: (Math.random() - 0.5) * 60, vy: 0, grab: false });
   }
   for (let k = 0; k < 600; k++) step(1 / 60); // settle before first paint
