@@ -30,3 +30,6 @@ export const COMPANIES: [import("./types").OrgKey, string, string][] = [
 
 /** "Stack & skills" row in About. */
 export const STACK = ["TypeScript", "Go", "Python", "Node.js", "NestJS", "Next.js", "React", "GraphQL", "PostgreSQL", "Redis", "MongoDB", "Supabase", "Docker", "AWS", "pgvector", "LangChain", "Card issuing", "Chargebacks", "Settlement", "TDD"];
+
+/** The soundtrack for the builds section: any YouTube video ID (the part after `watch?v=`). Leave it empty to hide the button. */
+export const MUSIC = { youtubeId: "e8GzTXRAJ30", title: "Tems · Free Mind" };

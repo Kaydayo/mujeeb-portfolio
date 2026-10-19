@@ -11,7 +11,8 @@ The site opens as an SSH session into `lagos-01`, which boots a hologram of me b
 | **Rust → WebAssembly** (`holo/`) | Hologram particle physics: springs, the cursor push, mouth and glitch |
 | **GSAP + ScrollTrigger** (3.12) | Pinned sections, scroll-scrubbed motion and reveals |
 | **Lenis** (1.1) | Smooth scrolling, wired into ScrollTrigger |
-| **Web Audio** | Interface sounds and the original groove in Builds; nothing is sampled |
+| **Web Audio** | Interface sounds (key clicks, blips, static) |
+| **YouTube IFrame API** | The soundtrack in Builds, set in `src/content/profile.ts` (`MUSIC`) |
 
 ## Run it
 
@@ -39,7 +40,7 @@ src/
     types.ts                the shapes of all of the above
   lib/                      shared helpers
     scroll.ts               Lenis + ScrollTrigger setup, scrollTo helpers
-    sound.ts, groove.ts     UI sounds; the synthesised Afrobeats groove
+    sound.ts, youtube.ts    UI sounds; the hidden YouTube player for the Builds soundtrack
     text.ts                 scramble effect, split-into-lines reveal
     logo.ts, pointer.ts, dom.ts
   sections/
@@ -70,6 +71,20 @@ tools/portrait.py           photo → portrait.bin point cloud
   2. Run `npm run portrait`. This needs Python with numpy, scipy and Pillow.
   3. Replace `public/assets/photo.jpg` with a square crop of the photo.
 
+## Deploy
+
+The build is a static site (`npm run build` → `dist/`), so any static host works.
+
+1. **Vercel:** import the GitHub repo at vercel.com. It detects Vite (build `npm run build`, output `dist`) and gives you a `*.vercel.app` address.
+2. **Free domain via [is-a.dev](https://is-a.dev):** fork [is-a-dev/register](https://github.com/is-a-dev/register), add `domains/<name>.json` and open a pull request:
+   ```json
+   {
+     "owner": { "username": "<your GitHub username>" },
+     "records": { "CNAME": "cname.vercel-dns.com" }
+   }
+   ```
+3. Once it's merged, add `<name>.is-a.dev` under the Vercel project's **Settings → Domains**. Vercel issues the HTTPS certificate.
+
 ## Rebuilding the WebAssembly
 
 A prebuilt `public/assets/holo.wasm` is included. You only need to rebuild it if you change `holo/src/lib.rs`:
@@ -84,5 +99,6 @@ The crate is `#![no_std]` with no dependencies. It exports raw pointers, so Java
 ## Notes
 
 - If the visitor prefers reduced motion, the boot typing, smooth scroll, physics and replays are skipped.
+- On phones (≤ 760px) the layout stacks: the hologram transcript gets a dark panel, the experience dial shrinks its text to fit, and the nav collapses into an "index" menu.
 - Without WebGL2, "On record" falls back to a flat strip of the same posters.
-- The music in Builds is an original groove generated in the browser. The Spotify link is the only reference to any other artist's music.
+- The music in Builds streams from YouTube through the official embed player; set the video in `MUSIC` in `src/content/profile.ts`.

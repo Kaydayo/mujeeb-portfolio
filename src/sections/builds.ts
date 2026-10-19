@@ -1,9 +1,10 @@
 // Builds: one full screen per project. The giant name splits open around the real recording,
-// then the clip zooms to fill the frame. The original groove plays only while this section is on screen.
+// then the clip zooms to fill the frame. The soundtrack (a YouTube video) plays only while this section is on screen.
 import { $, $$ } from "../lib/dom";
 import { gsap, ScrollTrigger, lockScroll, unlockScroll } from "../lib/scroll";
-import { Groove } from "../lib/groove";
+import { YouTubeMusic } from "../lib/youtube";
 import { BUILDS } from "../content/builds";
+import { MUSIC } from "../content/profile";
 
 const H264 = !!document.createElement("video").canPlayType('video/mp4; codecs="avc1.640028"');
 /** Browsers without H.264 get the .webm next to each .mp4. */
@@ -85,21 +86,16 @@ function initLightbox() {
 // ---------------------------------------------------------------- music while the builds are on screen
 function initMusic() {
   const btn = $("#wkUnplug"), now = $("#wkNow");
-  let stoppedByVisitor = false, inView = false;
-  const sync = () => {
-    const play = inView && !stoppedByVisitor;
-    if (play) { Groove.start(); now.hidden = false; now.textContent = Groove.suspended ? "♪ tap anywhere to hear it" : "♪ now playing · lagos-01 radio (original)"; }
-    else { Groove.stop(); now.hidden = true; }
-    btn.textContent = play ? "■ stop music" : "♪ play music"; btn.setAttribute("aria-pressed", String(play));
+  if (!MUSIC.youtubeId) { btn.parentElement!.hidden = true; return; }
+  let playing = false;
+  const set = (p: boolean) => {
+    playing = p; p ? YouTubeMusic.play(MUSIC.youtubeId) : YouTubeMusic.pause();
+    now.hidden = !p; now.textContent = `♪ now playing · ${MUSIC.title}`;
+    btn.textContent = p ? "■ stop music" : "♪ play music"; btn.setAttribute("aria-pressed", String(p));
   };
-  btn.addEventListener("click", () => { stoppedByVisitor = !stoppedByVisitor; if (!stoppedByVisitor) inView = true; sync(); });
-  // the first tap unlocks audio; refresh the label once it does
-  addEventListener("pointerdown", () => setTimeout(() => inView && !stoppedByVisitor && sync(), 60), { passive: true });
-  new IntersectionObserver(([e]) => {
-    const was = inView; inView = e.isIntersecting;
-    if (!inView && was) stoppedByVisitor = false;
-    if (inView !== was) sync();
-  }, { rootMargin: "-35% 0px -35% 0px" }).observe($("#works"));
+  // browsers only play sound after a tap, so the visitor starts it; scrolling away pauses it
+  btn.addEventListener("click", () => set(!playing));
+  new IntersectionObserver(([e]) => { if (!e.isIntersecting && playing) set(false); }, { rootMargin: "-35% 0px -35% 0px" }).observe($("#works"));
 }
 
 export function initBuilds() {

@@ -45,7 +45,9 @@
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 @media (max-width: 760px) {
   #hero { padding-top: 70vw; }
-  .holotape { position: relative; right: auto; top: auto; transform: none; width: auto; margin: 0 var(--gr) 22px var(--gl); }
+  /* on phones the transcript sits over the hologram's face, so give it a dark glass panel to read against */
+  .holotape { position: relative; right: auto; top: auto; transform: none; width: auto; margin: 0 var(--gr) 22px var(--gl); padding: 14px; border-radius: 14px; background: rgba(3,6,4,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  #caption .rest { color: rgba(var(--phos-rgb), .4); }
   #caption { font-size: 19px; min-height: 0; }
   .stamp { top: 76px; }
 }
