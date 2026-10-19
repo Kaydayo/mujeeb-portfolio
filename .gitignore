@@ -1,0 +1,5 @@
+node_modules/
+dist/
+holo/target/
+.DS_Store
+tools/portrait-preview.png

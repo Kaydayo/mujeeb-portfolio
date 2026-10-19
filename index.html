@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mujeeb Adebowale · Termlink</title>
+  <meta name="description" content="Mujeeb Adebowale, senior software engineer in Lagos. SSH in and meet the hologram.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=VT323&display=swap">
+</head>
+<body class="booting">
+<div id="cur" aria-hidden="true"><span id="curl">play</span></div>
+<div class="crtline" id="crtline" aria-hidden="true"></div>
+
+<div id="boot" role="dialog" aria-label="Connecting">
+  <div class="bar" id="bootbar"></div>
+  <div class="top"><span>termlink v3 · ed25519</span><span id="bootclock">lagos 00:00</span></div>
+  <div id="bootLog" aria-live="polite"></div>
+  <div class="foot"><span id="pct">000%</span><button id="skip" type="button">skip ›</button></div>
+</div>
+
+<nav class="nav wrap" aria-label="Primary">
+  <a class="brand" href="#hero"><b>MJB</b><span>/ lagos-01</span></a>
+  <ul>
+    <li><a href="#hero" data-sec="hero">Transmission</a></li>
+    <li><a href="#about" data-sec="about">About</a></li>
+    <li><a href="#logs" data-sec="logs">Experience</a></li>
+    <li><a href="#cases" data-sec="cases">Case files</a></li>
+    <li><a href="#works" data-sec="works">Builds</a></li>
+    <li><a href="#contact" data-sec="contact">Contact</a></li>
+  </ul>
+  <div class="right"><button class="pill" id="sndBtn" type="button" aria-pressed="true">sound on</button></div>
+</nav>
+
+<main>
+  <section id="hero" data-sec="hero">
+    <canvas id="gl" aria-label="A hologram of Mujeeb made of light particles"></canvas>
+    <div id="grain" aria-hidden="true"></div>
+    <div class="flicker" aria-hidden="true"></div>
+    <div class="hero-fx" aria-hidden="true"></div>
+    <div class="stamp hlabel"><span>6.47°N 3.62°E · <b id="clock">--:--</b> WAT</span><span id="dayline">day 000</span><span>host lagos-01 · <b>online</b></span><button class="chip" id="phosBtn" type="button" style="justify-self:start;margin-top:10px;pointer-events:auto">phosphor · <span id="phosName">green</span></button></div>
+    <div class="holotape">
+      <button class="tape-btn" id="playBtn" type="button" data-cursor="play"><span class="disc"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2l10 6-10 6z"/></svg></span><span><span class="t1" id="tapeT1">play holotape</span><span class="t2" id="tapeT2">msg_001 · transmission</span></span></button>
+      <div class="eq" id="eq" aria-hidden="true"></div>
+      <p id="caption" aria-live="polite"></p>
+      <div class="ask">
+        <form id="tform"><span>&gt;</span><label for="tin" style="position:absolute;left:-9999px">Ask the hologram</label><input id="tin" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="ask the hologram…"></form>
+        <div class="chips"><button class="chip" data-cmd="whoami" type="button">whoami</button><button class="chip" data-cmd="stack" type="button">stack</button><button class="chip" data-cmd="builds" type="button">builds</button><button class="chip" data-cmd="hire" type="button">hire</button></div>
+      </div>
+    </div>
+    <div class="hero-name wrap">
+      <span class="role"><span class="ln"><span>senior software engineer,</span></span></span>
+      <h1 class="giant rgb"><span class="ln"><span>Mujeeb</span></span></h1>
+      <div class="hero-meta hlabel"><span>payments · card issuing · settlement</span><span class="scrollcue"><i></i>scroll to descend</span></div>
+    </div>
+  </section>
+
+  <div class="paper" id="paper">
+  <section id="about" class="wrap ck" data-sec="about">
+    <div class="shead label"><span>01/</span><span>who's on the line</span><span>/07</span></div>
+    <div class="ck-card" data-cursor="hello"><img id="portraitImg" src="assets/photo.jpg" alt="Portrait of Mujeeb Adebowale"></div>
+    <h2 class="ck-name" id="ckName" aria-label="Mujeeb">Mujeeb</h2>
+    <p class="ck-tag">Correct matters more than clever. Every retry has to be safe at three in the morning.</p>
+    <div class="ck-rows">
+      <div class="ck-row"><i class="ck-rule"></i><div class="ck-idx"><span>01/</span><span>/03</span></div>
+        <div class="ck-k">About me</div>
+        <div class="ck-v ck-lines"><p>I'm Mujeeb Adebowale, a senior software engineer in Lagos. I build the card and payments systems that move money across Africa, where <em>correct</em> matters more than clever.</p><p>At Chipper Cash I work on the services that authorise card transactions, move money to and from our card processors, and keep balances and settlement accurate. I speak English, Yoruba and Hausa.</p></div>
+      </div>
+      <div class="ck-row"><i class="ck-rule"></i><div class="ck-idx"><span>02/</span><span>/03</span></div>
+        <div class="ck-k">Where I've worked</div>
+        <div class="ck-v ck-lines" id="ckCos"></div>
+      </div>
+      <div class="ck-row"><i class="ck-rule"></i><div class="ck-idx"><span>03/</span><span>/03</span></div>
+        <div class="ck-k">Stack &amp; skills</div>
+        <div class="ck-v ck-lines" id="ckSkills"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="logs" data-sec="logs">
+    <div class="wrap shead label"><span>02/</span><span>experience</span><span>/07</span></div>
+    <div class="wrap dialstage">
+      <div class="lside"><span class="label">company</span><span class="big" id="lgCo">Chipper Cash</span><span class="sub" id="lgSub">current</span></div>
+      <div class="dial">
+        <svg viewBox="-100 -100 200 200" aria-hidden="true"><g id="ticks"></g><circle r="96" fill="none" stroke="var(--rule)" stroke-width=".4"/><path id="arc" fill="none" stroke="var(--ink)" stroke-width="3.5"/></svg>
+        <div class="screen" id="lgScreen"></div>
+      </div>
+      <div class="rside"><span class="label">role</span><span class="big" id="lgRole">Senior Engineer</span><span class="sub" id="lgArea">Payments</span></div>
+    </div>
+    <div class="wrap logfoot label"><span>scroll to step through</span><span class="toggle"><span class="on">latest</span><span>index</span></span><span id="lgCount">01 / 04</span></div>
+  </section>
+
+  <section id="cases" data-sec="cases">
+    <div class="wrap shead label"><span>03/</span><span>case files</span><span>/07</span></div>
+    <div class="wrap casestage">
+      <div class="monitor">
+        <div class="tube"><canvas id="caseCv" aria-label="Animated replay of the selected case file"></canvas></div>
+        <div class="mlab label"><span id="caseLab">replay · billing.log</span><span>live</span></div>
+      </div>
+      <div class="glass">
+        <div class="gl-head label"><span>Selected case files</span><span id="caseN">01/04</span></div>
+        <div class="list" id="caseList"></div>
+        <div class="dots" id="caseDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap" data-sec="cases">
+    <div class="shead label"><span>04/</span><span>capabilities</span><span>/07</span></div>
+    <div class="pit" id="pit">
+      <div class="center"><span class="label">click &amp; drag</span><h2>What I'm<br>built from</h2></div>
+    </div>
+  </section>
+
+
+  </div>
+  <section id="works" data-sec="works">
+    <div class="wrap eu-intro">
+      <div class="shead label" style="border-color:#2a2e2b"><span>05/</span><span style="color:#f3f3f1">selected builds</span><span>/07</span></div>
+      <div class="eu-num">01—</div>
+      <div class="eu-lede"><span class="label">[after hours]</span>
+        <p>Two products I build outside my day job. Every clip below is the <em>actual app</em> running on my machine, not a mockup.</p>
+        <div class="eu-music"><button class="eu-btn" id="wkUnplug" type="button" aria-pressed="false">♪ play music</button><span id="wkNow" class="nowplaying" hidden>♪ now playing · lagos-01 radio (original)</span><a class="spot" href="https://open.spotify.com/search/Tems" target="_blank" rel="noopener">want Tems? listen on Spotify ↗</a></div>
+      </div>
+    </div>
+    <div class="eu-list" id="euList"></div>
+  </section>
+  <div class="paper" id="paper2" style="border-radius:0">
+  <section id="creds" data-sec="contact">
+    <div id="cabinet">
+      <canvas id="postergl" aria-label="Five printed posters, one for each record: education, training, publication, certificates and service"></canvas>
+      <div class="shead label"><span>06/</span><span>also on file</span><span>/07</span></div>
+      <div class="pst-nav"><h2>On record</h2><span class="count" id="pstN">01 / 05</span></div>
+      <div class="pst-cap" aria-live="polite"><b id="pstT"><span>BSc, Mathematical Science</span></b><small id="pstS">Federal University of Agriculture, Abeokuta · 2014–2019</small><button class="open" id="pstOpen" type="button">open the file →</button></div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap" data-sec="contact">
+    <div class="shead label"><span>07/</span><span>open a channel</span><span>/07</span></div>
+    <div class="card" id="card">
+      <span class="label">got a hard problem?</span>
+      <h2 id="connect">Let's connect</h2>
+      <button class="round" id="writeBtn" type="button" data-cursor="copy">write a<br>message</button>
+      <div class="mailrow"><span>or copy</span><code id="mail"></code></div>
+    </div>
+    <div class="socials label"><span>feel free to reach out</span><a href="https://www.linkedin.com/in/mujeeb-adebowale-794762199" target="_blank" rel="noopener">linkedin</a><a href="https://github.com/kaydayo" target="_blank" rel="noopener">github / kaydayo</a><a href="#hero">back to the hologram ↑</a></div>
+  </section>
+  </div>
+</main>
+<div id="rec" role="dialog" aria-modal="true" aria-labelledby="recTitle">
+  <div class="rec-top label"><button type="button" id="recBack">← back to the wall</button><span id="recN">file 01 / 05</span></div>
+  <div class="rec-body">
+    <div class="rec-poster"><img id="recImg" alt=""></div>
+    <div class="rec-main">
+      <div class="rec-k" id="recK"></div>
+      <h2 class="rec-title" id="recTitle"></h2>
+      <p class="rec-org" id="recOrg"></p>
+      <dl class="rec-meta" id="recMeta"></dl>
+      <div class="rec-text" id="recText"></div>
+      <ul class="rec-list" id="recList"></ul>
+      <button class="rec-next" id="recNext" type="button"><span>next record</span><b id="recNextT"></b></button>
+    </div>
+  </div>
+</div>
+<div id="mmenu" aria-hidden="true">
+  <a href="#hero"><span>00</span>Transmission</a><a href="#about"><span>01</span>About</a><a href="#logs"><span>02</span>Experience</a><a href="#cases"><span>03</span>Case files</a><a href="#works"><span>05</span>Builds</a><a href="#creds"><span>06</span>On record</a><a href="#contact"><span>07</span>Contact</a>
+</div>
+
+
+<footer>
+  <div class="marq" id="marq" aria-hidden="true"><span>Mujeeb</span><span>Backend</span><span>Mujeeb</span><span>Lagos</span><span>Mujeeb</span><span>Backend</span><span>Mujeeb</span><span>Lagos</span></div>
+  <div class="wrap fbar label"><span>three.js · rust → webassembly · gsap · lenis</span><span>© 2026 · connection secure</span></div>
+</footer>
+
+
+<div id="lb" hidden role="dialog" aria-label="Project demo">
+  <div class="box">
+    <div class="bar"><b id="lbTitle">Peguin</b><div class="tabs" id="lbTabs"></div><button id="lbClose" type="button">close ✕</button></div>
+    <video id="lbVideo" controls playsinline muted></video>
+  </div>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

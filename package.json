@@ -1,0 +1,25 @@
+{
+  "name": "mujeeb-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mujeeb Adebowale's portfolio: an SSH boot, a Rust/WebAssembly hologram, scroll-driven sections.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "wasm": "cargo build --manifest-path holo/Cargo.toml --release --target wasm32-unknown-unknown && cp holo/target/wasm32-unknown-unknown/release/holo.wasm public/assets/holo.wasm",
+    "portrait": "python3 tools/portrait.py tools/source-photo.jpg public/assets/portrait.bin tools/portrait-preview.png"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.13",
+    "three": "^0.158.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.158.3",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21"
+  }
+}

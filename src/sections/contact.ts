@@ -1,0 +1,41 @@
+// Contact card (spotlight follows the pointer, magnetic "write a message" button that copies the email)
+// and the footer marquee whose speed follows scroll velocity.
+import { $, coarsePointer } from "../lib/dom";
+import { gsap, ScrollTrigger } from "../lib/scroll";
+import { scramble } from "../lib/text";
+import { sfx } from "../lib/sound";
+import { CONTACT } from "../content/profile";
+
+export function initContact() {
+  $("#mail").textContent = CONTACT.email;
+  const card = $("#card");
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", e.clientX - r.left + "px"); card.style.setProperty("--my", e.clientY - r.top + "px");
+  });
+  const heading = $("#connect");
+  heading.addEventListener("pointerenter", () => scramble(heading, "Let's connect", 600));
+  ScrollTrigger.create({ trigger: heading, start: "top 80%", once: true, onEnter: () => scramble(heading, "Let's connect", 1100) });
+
+  const btn = $("#writeBtn");
+  if (!coarsePointer) {
+    btn.addEventListener("pointermove", (e) => { const r = btn.getBoundingClientRect(); gsap.to(btn, { x: (e.clientX - r.left - r.width / 2) * 0.35, y: (e.clientY - r.top - r.height / 2) * 0.35, duration: 0.4 }); });
+    btn.addEventListener("pointerleave", () => gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1,.4)" }));
+  }
+  btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(CONTACT.email); btn.innerHTML = "copied<br>✓"; }
+    catch { const s = getSelection()!, r = document.createRange(); r.selectNodeContents($("#mail")); s.removeAllRanges(); s.addRange(r); btn.innerHTML = "selected<br>⌘C"; }
+    sfx("blip"); setTimeout(() => (btn.innerHTML = "write a<br>message"), 1800);
+  });
+}
+
+// ---------------------------------------------------------------- footer marquee
+let marq: HTMLElement, x = 0, lastY = scrollY, velocity = 0;
+export function initMarquee() { marq = $("#marq"); marq.innerHTML += marq.innerHTML; }
+/** Called every frame. */
+export function tickMarquee() {
+  const y = scrollY; velocity += (y - lastY - velocity) * 0.1; lastY = y;
+  x -= 1.1 + Math.abs(velocity) * 0.25;
+  const half = marq.scrollWidth / 2; if (-x > half) x += half;
+  marq.style.transform = `translateX(${x}px)`;
+}

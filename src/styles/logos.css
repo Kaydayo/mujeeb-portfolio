@@ -1,0 +1,4 @@
+/* ---------- logos: the real mark when it's available, a clean monogram until then */
+.logo { --c: #0d100e; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s, 34px); height: var(--s, 34px); border-radius: 9px; background: var(--c); color: #fff; overflow: hidden; vertical-align: middle; }
+.logo b { font-family: var(--wide); font-variation-settings: "wdth" 110; font-weight: 800; font-size: calc(var(--s, 34px) * .36); letter-spacing: -.02em; line-height: 1; }
+.logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #fff; }

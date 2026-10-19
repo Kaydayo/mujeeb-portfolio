@@ -1,0 +1,6 @@
+/* =================================================== PAPER WORLD */
+main { background: var(--void); }
+.paper { position: relative; z-index: 5; background: var(--paper); border-radius: 50% 50% 0 0 / 7vw 7vw 0 0; }
+.shead { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; padding-top: 14px; padding-bottom: 26px; border-top: 1px solid var(--rule); }
+.shead span:nth-child(2) { text-align: center; color: var(--ink); }
+.shead span:last-child { text-align: right; }

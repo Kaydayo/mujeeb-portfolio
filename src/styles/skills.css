@@ -1,0 +1,9 @@
+/* skills: Chris physics */
+#skills { padding-block: clamp(90px, 12vh, 140px); }
+.pit { position: relative; height: min(70vh, 640px); border: 1px solid var(--rule); border-radius: 28px; overflow: hidden; background: #fff; touch-action: pan-y; }
+.pit .center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 10px; pointer-events: none; padding: 0 20px; }
+.pit .center h2 { margin: 0; font-family: var(--wide); font-variation-settings: "wdth" 115; font-weight: 500; font-size: clamp(30px, 4.6vw, 76px); line-height: .95; letter-spacing: -.03em; text-transform: uppercase; }
+.bub { position: absolute; left: 0; top: 0; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; text-align: center; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: rgba(255,255,255,.75); user-select: none; -webkit-user-select: none; touch-action: none; padding: 8px; line-height: 1.25; will-change: transform; transition: background .2s, color .2s; }
+.bub:hover, .bub.grab { background: var(--ink); color: var(--paper); }
+.bub.domain { background: var(--ink); color: var(--paper); }
+.bub.domain:hover, .bub.domain.grab { background: var(--accent); border-color: var(--accent); }

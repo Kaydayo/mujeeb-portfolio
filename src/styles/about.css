@@ -1,0 +1,27 @@
+/* ---------- about, Chris K style: photo card, a giant name riding over it, numbered rows whose lines rise in */
+#about.ck { padding-block: clamp(96px, 12vh, 150px) clamp(80px, 10vh, 130px); }
+.ck-card { position: relative; height: clamp(300px, 56vh, 600px); border-radius: clamp(14px, 1.6vw, 26px); overflow: hidden; background: #dfe3e0; clip-path: inset(0 0 0 0 round 22px); }
+.ck-card img { position: absolute; inset: -12% 0; width: 100%; height: 124%; object-fit: cover; object-position: 50% 32%; filter: grayscale(1) contrast(1.04); transition: filter .6s; will-change: transform; }
+.ck-card:hover img { filter: grayscale(.15); }
+.ck-name { position: relative; z-index: 2; margin: calc(clamp(60px, 11vw, 210px) * -.62) 0 0; text-align: right; font-family: var(--wide); font-variation-settings: "wdth" 112; font-weight: 500; font-size: clamp(64px, 15vw, 290px); line-height: .8; letter-spacing: -.05em; color: var(--ink); mix-blend-mode: normal; pointer-events: none; }
+.ck-name .ch { display: inline-block; will-change: transform; }
+.ck-tag { margin: 18px 0 0; max-width: 34ch; font-family: var(--wide); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.35; }
+.ck-rows { margin-top: clamp(80px, 14vh, 170px); display: grid; gap: clamp(70px, 12vh, 140px); }
+.ck-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 24px; row-gap: 40px; padding-top: 22px; }
+.ck-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--ink); transform-origin: left; }
+.ck-idx { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 24px; font-family: var(--wide); font-size: 12px; }
+.ck-k { font-family: var(--wide); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.ck-v { font-family: var(--wide); font-variation-settings: "wdth" 100; font-weight: 400; font-size: clamp(22px, 2.3vw, 38px); line-height: 1.16; letter-spacing: -.02em; }
+.ck-v p { margin: 0 0 .7em; } .ck-v p:last-child { margin: 0; }
+.ck-v p:first-child::before { content: ''; display: inline-block; width: 2.2em; }
+.ck-v.split p:first-child::before { display: none; }
+.ck-v p:first-child .lnm:first-child > span { padding-left: 2.2em; }
+.ck-v em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; color: var(--accent); }
+.ck-v .sep { color: #a6aca7; margin-left: .3em; }
+.ck-v .it { white-space: nowrap; }
+.ck-v .co { white-space: nowrap; display: inline-flex; align-items: center; gap: .3em; }
+.ck-v .co .logo { --s: 1.05em; border-radius: .26em; transform: translateY(-.04em); }
+.ck-v .co small { font-size: .42em; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); align-self: flex-start; margin-top: .3em; }
+.lnm { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+.lnm > span { display: block; will-change: transform; }
+@media (max-width: 760px) { .ck-row, .ck-idx { grid-template-columns: minmax(0, 1fr); } .ck-idx span:last-child { display: none; } .ck-name { text-align: left; } }

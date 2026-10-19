@@ -1,0 +1,20 @@
+/* cases: Mason glass list beside a monitor */
+#cases { height: 100vh; height: 100svh; overflow: hidden; display: grid; grid-template-rows: auto 1fr; padding-top: 80px; }
+.casestage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 60px); align-items: center; padding-bottom: 30px; min-height: 0; }
+.monitor { position: relative; border-radius: 22px; padding: 14px; background: linear-gradient(160deg, #1a1d1b, #0b0d0c); box-shadow: 0 40px 80px rgba(13,16,14,.25); min-width: 0; }
+.monitor .tube { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: radial-gradient(120% 100% at 50% 40%, #121513, #050606); box-shadow: inset 0 0 60px rgba(0,0,0,.9); }
+.monitor canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.monitor .tube::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,.3) 2px 3px), radial-gradient(100% 80% at 50% 0%, rgba(255,255,255,.05), transparent 60%); pointer-events: none; }
+.monitor .mlab { display: flex; justify-content: space-between; margin-top: 10px; color: #9aa19c; }
+.glass { position: relative; height: min(64vh, 560px); border-radius: 22px; border: 1px solid var(--rule); background: rgba(255,255,255,.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow: hidden; min-width: 0; }
+.glass .gl-head { position: absolute; top: 20px; left: 24px; right: 24px; display: flex; justify-content: space-between; z-index: 2; }
+.glass .list { position: absolute; left: 24px; right: 24px; top: 50%; }
+.citem { position: absolute; left: 0; right: 0; top: 0; will-change: transform, filter, opacity; }
+.citem h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 58px); line-height: .98; }
+.citem .tags { margin-top: 10px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--mid); }
+.citem p { margin: 14px 0 0; font-size: 13px; color: var(--mid); max-width: 46ch; }
+.citem p code { color: var(--ink); background: var(--paper-2); padding: 1px 5px; border-radius: 4px; }
+.dots { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 7px 10px; border-radius: 99px; background: rgba(255,255,255,.7); border: 1px solid var(--rule); }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--rule); transition: background .3s, transform .3s; }
+.dots i.on { background: var(--ink); transform: scale(1.3); }
+@media (max-width: 900px) { .casestage { grid-template-columns: minmax(0, 1fr); align-content: center; } .glass { height: 44vh; } .monitor { padding: 10px; } .citem p { display: none; } }

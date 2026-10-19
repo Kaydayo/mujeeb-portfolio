@@ -1,0 +1,7 @@
+/* ---------- small screens: the index opens as a full menu */
+.menuBtn { display: none; }
+@media (max-width: 900px) { .menuBtn { display: inline-flex; } }
+#mmenu { position: fixed; inset: 0; z-index: 80; background: var(--ink); color: var(--paper); display: grid; align-content: center; padding: 90px var(--gr, 20px) 40px var(--gl, 20px); clip-path: circle(0% at calc(100% - 40px) 34px); visibility: hidden; }
+#mmenu.open { visibility: visible; }
+#mmenu a { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid #2a2e2b; color: var(--paper); text-decoration: none; font-family: var(--wide); font-variation-settings: "wdth" 112; font-weight: 600; font-size: clamp(30px, 9vw, 52px); letter-spacing: -.03em; line-height: 1; }
+#mmenu a span { font-family: var(--mono); font-size: 11px; font-weight: 400; color: #8b928d; letter-spacing: .1em; }
