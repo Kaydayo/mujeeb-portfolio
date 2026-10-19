@@ -25,4 +25,11 @@
 .rec-next { margin-top: 50px; display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; padding: 26px 0; border: 0; border-top: 1px solid var(--ink); background: none; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
 .rec-next span { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mid); }
 .rec-next b { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; }
+.rec-doc { margin: 40px 0 0; display: grid; gap: 12px; }
+.rec-doc[hidden] { display: none; }
+.rec-doc-k { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mid); }
+.rec-doc a { display: block; border-radius: 6px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(13,16,14,.16), 0 0 0 1px var(--rule); transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+.rec-doc a:hover { transform: translateY(-4px) rotate(-.4deg); box-shadow: 0 30px 60px rgba(13,16,14,.22), 0 0 0 1px var(--rule); }
+.rec-doc img { display: block; width: 100%; height: auto; }
+.rec-doc figcaption { font-size: 13px; color: var(--mid); }
 @media (max-width: 860px) { .rec-body { grid-template-columns: minmax(0, 1fr); } .rec-poster { position: relative; top: 0; } .rec-poster img { max-width: 300px; } .rec-meta { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }

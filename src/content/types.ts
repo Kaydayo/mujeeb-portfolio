@@ -1,6 +1,6 @@
 // Shapes for everything in src/content. Edit the content files; the sections render from them.
 
-export interface Contact { email: string; github: string; linkedin: string }
+export interface Contact { email: string; github: string; linkedin: string; whatsapp: string }  // whatsapp: digits only, with country code
 
 /** One thing the hologram can say. Add `audio` (a URL to a recording) and it lip-syncs to it. */
 export interface VoiceLine { text: string; audio?: string }
@@ -42,5 +42,6 @@ export interface RecordEntry {
   meta: [string, string][];
   text: string[];
   list: [string, string][];
+  doc?: { src: string; alt: string; note: string };  // a copy of the certificate, shown on the record page
   poster: PosterDesign;
 }

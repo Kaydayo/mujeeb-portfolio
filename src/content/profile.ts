@@ -4,6 +4,7 @@ export const CONTACT: Contact = {
   email: "olukayodedayo100@gmail.com",
   github: "https://github.com/kaydayo",
   linkedin: "https://www.linkedin.com/in/mujeeb-adebowale-794762199",
+  whatsapp: "2348188441180",
 };
 
 /**

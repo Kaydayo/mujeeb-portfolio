@@ -19,10 +19,12 @@ function fill(i: number) {
   $("#recMeta").innerHTML = r.meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
   $("#recText").innerHTML = r.text.map((p) => `<p>${p}</p>`).join("");
   $("#recList").innerHTML = r.list.map(([b, t], n) => `<li><span>0${n + 1}</span><span><b>${b}.</b> ${t}</span></li>`).join("");
+  const doc = $("#recDoc"); doc.hidden = !r.doc;
+  if (r.doc) { $<HTMLImageElement>("#recDocImg").src = r.doc.src; $<HTMLImageElement>("#recDocImg").alt = r.doc.alt; $<HTMLAnchorElement>("#recDocLink").href = r.doc.src; $("#recDocNote").textContent = r.doc.note; }
   $("#recNextT").textContent = RECORDS[(i + 1) % RECORDS.length].t;
   $("#rec").scrollTop = 0;
   gsap.fromTo("#recImg", { rotationX: -28, y: 40, opacity: 0 }, { rotationX: 0, y: 0, opacity: 1, duration: 1.4, ease: "elastic.out(1, .55)", delay: 0.15 });
-  gsap.fromTo(["#recK", "#recTitle", "#recOrg", "#recMeta", "#recText", "#recList", "#recNext"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 1, ease: "expo.out", delay: 0.2 });
+  gsap.fromTo(["#recK", "#recTitle", "#recOrg", "#recMeta", "#recText", "#recList", "#recDoc", "#recNext"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 1, ease: "expo.out", delay: 0.2 });
 }
 
 export function openRecord(i: number, pushHistory = true) {
