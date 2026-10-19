@@ -2,7 +2,7 @@
 import { $, $$ } from "../lib/dom";
 import { gsap, lockScroll, unlockScroll, scrollToTarget } from "../lib/scroll";
 import { sound } from "../lib/sound";
-import { Groove } from "../lib/groove";
+import { YouTubeMusic } from "../lib/youtube";
 import { voice } from "./hero/holotape";
 
 const sections = () => $$("section[data-sec]");
@@ -25,7 +25,7 @@ function initAnchors() {
 function initSoundToggle() {
   const btn = $("#sndBtn");
   btn.addEventListener("click", () => {
-    sound.on = !sound.on; Groove.mute(!sound.on);
+    sound.on = !sound.on; YouTubeMusic.mute(!sound.on);
     btn.textContent = sound.on ? "sound on" : "sound off"; btn.setAttribute("aria-pressed", String(sound.on));
     if (!sound.on) voice.el?.pause();
   });

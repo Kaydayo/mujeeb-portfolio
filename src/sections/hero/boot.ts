@@ -19,7 +19,7 @@ const SCRIPT: [string, string, 0 | 1, string?][] = [
   ["", `<span class="d">Warning: Permanently added 'lagos-01' (ED25519) to the list of known hosts.</span>`, 0],
   ["", "guest@lagos-01's password: ", 0, "••••••••"],
   ["", `<span class="d">Last login: ${lastLogin} WAT</span>`, 0],
-  ["", `\n<span class="inv">TERMLINK · PERSONNEL RECORD · MUJEEB</span>`, 0],
+  ["", `\n<span class="inv">PERSONNEL RECORD · MUJEEB</span>`, 0],
   ["", "> loading holo.wasm ............ ", 0, "@wasm"],
   ["", "> decoding portrait ............ ", 0, "@pts"],
   ["", "> warming projector ............ ", 0, "ok"],

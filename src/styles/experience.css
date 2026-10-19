@@ -20,7 +20,9 @@
   .dialstage { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 12px; }
   .rside { text-align: center; }
   .dial { width: min(86vw, 50vh); }
-  .dial .screen { inset: 15%; }
+  .dial .screen { inset: 12%; padding: 6%; gap: 8px; align-content: safe center; }
+  .screen ul { gap: 4px; font-size: 11px; line-height: 1.35; }
+  .screen p { font-size: 11.5px; }
 }
 
 /* ---------- experience: logo on the dial, a real index view */
