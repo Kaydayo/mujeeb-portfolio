@@ -18,7 +18,7 @@ function renderRows() {
       <div class="eu-stick"><i class="eu-plus tl"></i><i class="eu-plus tr"></i><i class="eu-plus bl"></i><i class="eu-plus br"></i>
         <span class="eu-count">0${i + 1} / 0${BUILDS.length}</span>
         <h3 class="eu-name"><span class="h">${left}</span><span class="eu-win"><video muted loop playsinline preload="none" data-src="${clipSrc(b.clips[0].src)}" aria-label="${b.name} demo"></video></span><span class="h">${right}</span></h3>
-        <div class="eu-foot"><div class="eu-tags">${b.tags.map((t) => `<span>${t}</span>`).join("")}<span>${b.year}</span></div><p class="eu-what">${b.what}</p><button class="eu-view" type="button" data-cursor="watch">view project ↗</button></div>
+        <div class="eu-foot"><div class="eu-tags">${b.tags.map((t) => `<span>${t}</span>`).join("")}<span>${b.year}</span></div><p class="eu-what">${b.what}</p><div class="eu-acts"><button class="eu-view" type="button" data-cursor="watch">view project ↗</button>${b.site ? `<a class="eu-view" href="${b.site}" target="_blank" rel="noopener">visit ${b.site.replace(/^https?:\/\/(www\.)?/, "")} ↗</a>` : ""}</div></div>
       </div></article>`);
   });
 }

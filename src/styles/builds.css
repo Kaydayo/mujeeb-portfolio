@@ -25,13 +25,14 @@
 .eu-foot { position: absolute; left: 0; right: 0; bottom: clamp(56px, 9vh, 90px); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 24px; align-items: end; padding-inline: max(66px, 5vw); }
 .eu-tags { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--wide); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #8a8f8b; }
 .eu-what { grid-column: 1; max-width: 62ch; font-size: 13px; line-height: 1.5; color: #b9bdb9; margin: 0; }
-.eu-view { grid-column: 2; grid-row: 1 / span 2; align-self: end; background: none; border: 0; color: #f3f3f1; font-family: var(--wide); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; padding: 6px 0; border-bottom: 1px solid #f3f3f1; }
+.eu-acts { grid-column: 2; grid-row: 1 / span 2; align-self: end; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.eu-view { background: none; text-decoration: none; border: 0; color: #f3f3f1; font-family: var(--wide); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; padding: 6px 0; border-bottom: 1px solid #f3f3f1; }
 .eu-count { position: absolute; top: 84px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: #8a8f8b; }
 @media (max-width: 760px) {
   .eu-intro { grid-template-columns: minmax(0, 1fr); }
   .eu-name { font-size: 30vw; }
   .eu-foot { grid-template-columns: minmax(0, 1fr); padding-inline: 22px; bottom: 60px; }
-  .eu-view { grid-column: 1; grid-row: auto; justify-self: start; }
+  .eu-acts { grid-column: 1; grid-row: auto; justify-self: start; }
   .eu-plus.tl, .eu-plus.tr { top: 70px; }
 }
 

@@ -22,7 +22,7 @@ export interface CaseFile { t: string; tags: string; p: string; f: "billing" | "
 export type Skill = [string, 0 | 1];
 
 export interface Clip { src: string; label: string; w: number; h: number }
-export interface Build { name: string; split: number; year: string; tags: string[]; what: string; clips: Clip[] }
+export interface Build { name: string; split: number; year: string; tags: string[]; what: string; clips: Clip[]; site?: string }  // site: optional live URL
 
 export type OrgKey = "chipper" | "maxng" | "casha" | "tpp" | "funaab" | "decagon" | "anthropic" | "scrumstudy" | "nysc" | "paper";
 export interface Org { n: string; m: string; c: string }  // name, monogram, brand colour
