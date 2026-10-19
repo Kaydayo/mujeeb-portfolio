@@ -26,7 +26,7 @@ function billing(c: Ctx, w: number, h: number, t: number) {
     const p = ease((L - r.s) / 1.5), x0 = 16, x1 = lx - 130, x = x0 + (x1 - x0) * p;
     const bounced = k === 1 && L > r.s + 1.5, bxp = bounced ? x1 - ease((L - r.s - 1.6) / 0.9) * 110 : x;
     box(c, bxp, r.y - 13, 116, 26, bounced ? 0.4 : 0.9, bounced ? 0 : 0.1); text(c, r.l, bxp + 58, r.y, bounced ? 0.45 : 1, 15, "center");
-    if (p >= 1 && k === 0) { text(c, "fee:card_7f3a:2026-10", lx + 10, h / 2 - 4, 1); text(c, "OK  CHARGED  N1,000.00", lx + 10, h / 2 + 18, 0.8); }
+    if (p >= 1 && k === 0) { text(c, "charge:acct_7f3a:2026-10", lx + 10, h / 2 - 4, 1); text(c, "OK  CHARGED  N1,000.00", lx + 10, h / 2 + 18, 0.8); }
     if (bounced) text(c, "409 KEY EXISTS · SKIPPED", x1 + 110, r.y + 28, Math.sin(t * 12) > 0 ? 1 : 0.5, 15, "right");
   });
 }
@@ -35,7 +35,7 @@ function billing(c: Ctx, w: number, h: number, t: number) {
 function lock(c: Ctx, w: number, h: number, t: number) {
   const cx = w * 0.64, cy = h / 2, N = 5, cyc = 1.8, holder = Math.floor(t / cyc) % N, ph = (t % cyc) / cyc;
   box(c, cx - 76, cy - 38, 152, 76, 0.8, 0.06);
-  text(c, "REDIS", cx, cy - 20, 0.55, 15, "center"); text(c, "lock:ephemeral-key", cx, cy, 1, 15, "center"); text(c, "sha256(nonce)", cx, cy + 20, 0.7, 15, "center");
+  text(c, "REDIS", cx, cy - 20, 0.55, 15, "center"); text(c, "lock:resource", cx, cy, 1, 15, "center"); text(c, "ttl 5s", cx, cy + 20, 0.7, 15, "center");
   for (let i = 0; i < N; i++) {
     const y = 30 + i * ((h - 60) / (N - 1)), x = 30, on = i === holder;
     c.beginPath(); c.arc(x, y, 9, 0, 7); c.fillStyle = ink(on ? 1 : 0.06); c.fill(); c.strokeStyle = ink(on ? 1 : 0.4); c.stroke();
@@ -46,10 +46,10 @@ function lock(c: Ctx, w: number, h: number, t: number) {
   c.strokeStyle = ink(1); c.lineWidth = 2; c.beginPath(); c.arc(cx, cy, 52, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (1 - ph)); c.stroke(); c.lineWidth = 1;
 }
 
-/** Messy pasted card IDs get normalised, junk is flagged, valid ones go out in batches of 25. */
+/** Messy pasted IDs get normalised, junk is flagged, valid ones go out in batches of 25. */
 const pasted = Array.from({ length: 36 }, (_, i) => {
   const u = crypto.randomUUID ? crypto.randomUUID() : "3f2a9c1e-77b0-4c2d-9e51-0b6d3a1f8e" + (10 + i), r = i % 7;
-  return r === 3 ? { s: "card-" + (1000 + i), ok: false } : r === 5 ? { s: "  " + u.toUpperCase() + "\\r", ok: true } : { s: u + (r === 1 ? " \\r\\n" : ""), ok: true };
+  return r === 3 ? { s: "item-" + (1000 + i), ok: false } : r === 5 ? { s: "  " + u.toUpperCase() + "\\r", ok: true } : { s: u + (r === 1 ? " \\r\\n" : ""), ok: true };
 });
 function revoke(c: Ctx, w: number, h: number, t: number) {
   const rows = 7, rh = (h - 40) / rows, sh = t * 1.1, base = Math.floor(sh), fr = sh - base;
@@ -64,12 +64,12 @@ function revoke(c: Ctx, w: number, h: number, t: number) {
   const sent = Math.floor(t * 0.95), inBatch = sent % 25, batch = Math.floor(sent / 25), bw = 96, bx = w - bw - 14, by = h / 2 - 44;
   box(c, bx, by, bw, 88, 0.8); c.fillStyle = ink(0.18); c.fillRect(bx + 1, by + 87 - (86 * inBatch) / 25, bw - 2, (86 * inBatch) / 25);
   text(c, inBatch + "/25", bx + bw / 2, by + 34, 1, 22, "center"); text(c, "BATCH #" + (batch + 1), bx + bw / 2, by + 60, 0.6, 15, "center");
-  if (inBatch < 2 && batch) text(c, "POST /revoke x25", bx + bw / 2, by + 106, 1, 15, "center");
+  if (inBatch < 2 && batch) text(c, "SENT x25", bx + bw / 2, by + 106, 1, 15, "center");
 }
 
-/** A dispute queue that keeps re-sorting itself by time left until the evidence deadline. */
-const reasons = ["fraudulent", "product_not_received", "duplicate", "subscription_canceled", "credit_not_processed", "unrecognized"];
-const disputesState = reasons.map((r, i) => ({ r, id: "dp_" + (0x3a10 + i * 917).toString(16), due: 20 + i * 31 + (i % 2) * 17, left: 0, y: undefined as number | undefined }));
+/** A queue that keeps re-sorting itself by time left until each deadline. */
+const reasons = ["review", "follow-up", "approval", "reconcile", "report", "handover"];
+const disputesState = reasons.map((r, i) => ({ r, id: "task_" + (0x3a10 + i * 917).toString(16), due: 20 + i * 31 + (i % 2) * 17, left: 0, y: undefined as number | undefined }));
 function disputes(c: Ctx, w: number, h: number, t: number) {
   disputesState.forEach((it) => { it.left = it.due - ((t * 9) % 200); if (it.left < 2) it.left += 200; });
   const sorted = [...disputesState].sort((a, b) => a.left - b.left);

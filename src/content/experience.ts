@@ -3,7 +3,7 @@ import type { Job, CaseFile, Skill } from "./types";
 /** Experience dial, newest first. */
 export const JOBS: Job[] = [
   { co: "Chipper Cash", logo: "chipper", sub: "01/2025 – now", role: "Senior Software Engineer", area: "Card issuing & payments", k: "card + payments infrastructure",
-    body: ["Redis idempotency lock ended a class of card-reveal failures", "Fixed fee billing double charges at month end", "Built Dispute Desk for chargebacks", "Bulk card revocation for fraud response"], tint: "#eef1ec" },
+    body: ["Card and payment services that are safe to retry", "Scheduled billing that charges exactly once", "Internal tools for disputes and chargebacks", "Ops tooling for card operations at scale"], tint: "#eef1ec" },
   { co: "Maxng", logo: "maxng", sub: "12/2023 – 2025", role: "Senior Software Engineer III", area: "Lagos · team lead", k: "led a fintech build",
     body: ["NestJS, TypeScript, PostgreSQL", "Drove TDD adoption: 30% fewer bugs", "Reliability work on Postgres and MongoDB", "20% lift in customer satisfaction"], tint: "#ece9e5" },
   { co: "Casha!", logo: "casha", sub: "10/2021 – 11/2023", role: "Backend Engineer", area: "Lagos · fintech", k: "backend services",
@@ -14,14 +14,14 @@ export const JOBS: Job[] = [
 
 /** Case files: each one has a live replay drawn by sections/cases/replays.ts (matched by `f`). */
 export const CASES: CaseFile[] = [
-  { t: "The midnight double charge", tags: "billing · idempotency · cron", f: "billing",
-    p: "A monthly card fee job could double-charge around month boundaries. The fix keys every charge to its billing period, <code>fee:{card}:{yyyy-mm}</code>, so a retry that crosses midnight is skipped." },
-  { t: "Five workers, one key", tags: "redis · distributed lock · sha-256", f: "lock",
-    p: "Concurrent requests for a provider's ephemeral key returned 403s. Issuance now sits behind <code>SET … NX PX</code>, with the nonce stored only as a SHA-256 hash." },
-  { t: "Bulk card revocation", tags: "ops tooling · batching · retool", f: "revoke",
-    p: "Ops paste messy lists of card IDs. The tool strips <code>\\r\\n</code>, validates each UUID, drops junk and revokes in batches behind a confirmation step." },
-  { t: "Dispute Desk", tags: "stripe disputes · queues · console", f: "disputes",
-    p: "Disputes carry hard evidence deadlines. A deadline-aware queue, kanban, evidence builder and drawer keep the next thing that can be lost on top." },
+  { t: "Exactly-once billing", tags: "billing · idempotency · scheduled jobs", f: "billing",
+    p: "A scheduled charge should never run twice, even when a job retries across a boundary like midnight. Keying each charge to its account and billing period turns a repeat run into a safe no-op." },
+  { t: "Five workers, one key", tags: "redis · distributed locks · concurrency", f: "lock",
+    p: "When several workers race for the same resource, only one should do the work. A short-lived lock lets one worker win while the others wait and reuse its result." },
+  { t: "Bulk operations, safely", tags: "ops tooling · validation · batching", f: "revoke",
+    p: "Operators often work from messy pasted lists. Good tooling cleans and validates every entry, flags what doesn't belong and runs the rest in small batches behind a confirmation step." },
+  { t: "Deadline-aware queues", tags: "queues · internal tools · prioritisation", f: "disputes",
+    p: "Some work has hard deadlines. A queue sorted by time left, with everything needed to act in one place, keeps the most urgent item on top." },
 ];
 
 /** Physics bubbles. 1 = domain skill (drawn dark). */
